@@ -1,0 +1,32 @@
+#include <simplecpp>
+int main(){
+  float marks[60]; // marks[i] stores the marks of roll number i+1.
+  for(int i=0; i<60; i++){
+    cout << "Marks for roll number " << i+1 << ": ";
+    cin >> marks[i];
+  }
+  float maxSoFar = marks[0];
+  for(int i=1; i<60; i++){   // i starts at 1 because we already took marks[0]
+  maxSoFar = max(maxSoFar, marks[i]);
+}
+\end{verbatim}
+The next step is to print the roll numbers of those students who got
+marks equal to {\tt maxSoFar}.  This is easily done, we examine each
+{\tt marks[i]}, for all {\tt i} as {\tt i} goes from 0 to 99, and
+whenever we find {\tt marks[i]} equalling {\tt maxSoFar}, we print out
+{\tt i+1}, because we stored the marks of roll number {\tt i+1} at
+index {\tt i}.
+\begin{verbatim}
+for(int i=0; i<60; i++)
+   if(marks[i] == maxSoFar) 
+     cout << "Roll number " << i+1 << " got maximum marks." << endl;
+  while(true){
+    cout << "Roll number: ";
+    int rollNo;
+    cin >> rollNo;
+
+    if(rollNo == -1) break;
+
+    cout << "Marks: " << marks[rollNo-1] << endl;
+  }
+}

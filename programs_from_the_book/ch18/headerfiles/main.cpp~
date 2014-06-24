@@ -1,0 +1,9 @@
+#include <simplecpp>
+#include "V3.h"
+int main(){
+  V3 u,a,s;
+  double t;
+  cin >> u.x >> u.y >> u.z >> a.x >> a.y >> a.z >> t;
+  s = sum(scale(u,t), scale(a,t*t/2));
+  cout << length(s) << endl;
+}

@@ -1,0 +1,44 @@
+#include <simplecpp>
+int main(){
+const int n = 100; // estimate of max waiting drivers.
+int driverID[n], nWaiting = 0, front = 0;
+
+while(true){ /* Invariants: nWaiting denotes the number of waiting drivers.  
+                0 <= nWaiting <= n.  IDs of waiting drivers are in driverID,
+                from driverID[front] to driverID[(front + nWaiting - 1) %n ].
+                0 <= front < n
+             */
+  char command; cin >> command;
+  if(command == 'd'){                           // driver arrives
+    if(nWaiting >= n) cout << "Queue full.  Try later.\n";
+    else{
+      cin >> driverID[(front + nWaiting) % n];
+      nWaiting++;
+    }
+  }
+  else if(command == 'c'){                     // customer arrives
+    if(nWaiting == 0) cout << "Nothing available.  Try later.\n";
+    else{
+      cout << "Assigning " << driverID[front] << endl;
+      front = (front + 1) % n;
+      nWaiting--;
+    }
+  }
+  else if(command == 'x') break;
+  else cout << "Illegal command.\n";
+}
+  int count[10]; // count[i] will store the number of marks in the range
+  // i*10 through (i+1)*10 -1.
+  for(int i=0; i<10; i++)
+    count[i]=0;
+  for(int i=0; i< 60; i++){
+    float marks;
+    cin >> marks;
+    int index = marks/10;
+    if(index >= 0 && index <= 9) count[index]++;
+    else cout << "Marks are out of range." << endl;
+  }
+  for(int i=0; i<10; i++)
+    cout << count[i] <<' ';
+  cout << endl;
+}

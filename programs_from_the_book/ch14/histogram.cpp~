@@ -1,0 +1,60 @@
+#include <simplecpp>
+int main(){
+int count[10]; // count[i] will store the number of marks in the range
+               // i*10 through (i+1)*10 -1.
+\end{verbatim}
+Clearly, we should set the counts to 0 at the beginning, and change
+them as we read in the marks.
+\begin{verbatim}
+for(int i=0; i<10; i++)
+  count[i]=0;
+\end{verbatim}
+When we read the next mark, how do we decide which count to increment?
+It is natural to write something like the following.
+\begin{verbatim}
+  for(int i=0; i< 60; i++){          // can do better than this!
+    float marks;
+    cin >> marks;
+    if(marks <= 9) count[0]++;
+    else if(marks <= 19) count[1]++;
+    else if(marks <= 29) count[2]++;
+    else if(marks <= 39) count[3]++;
+    else if(marks <= 49) count[4]++;
+    else if(marks <= 59) count[5]++;
+    else if(marks <= 69) count[6]++;
+    else if(marks <= 79) count[7]++;
+    else if(marks <= 89) count[8]++;
+    else if(marks <= 99) count[9]++;
+    else cout << "Marks are out of range." << endl;
+  }
+\end{verbatim}
+This works, but there is a better way!  Suppose we read a mark $m$,
+which count should we increase?  For this we simply need to know the
+tens place digit of $m$.  As you might observe, this is simply
+$\floor{m/10}$, i.e. the integer part of $m/10$.  But we can get the
+integer part by storing into an integer variable!  This is what the
+following code does.
+\begin{verbatim}
+  for(int i=0; i< 60; i++){
+    float marks;
+    cin >> marks;
+    int index = marks/10;
+    if(index >= 0 && index <= 9) count[index]++;
+    else cout << "Marks are out of range." << endl;
+  }
+\end{verbatim}
+  int rollno[60];
+  double marks[60];
+  
+  for(int i=0; i<60; i++) cin >> rollno[i] >> marks[i];
+  
+  while(true){
+    int r; cin >> r;  // roll number whose marks are requested
+    if(r == -1) break;
+    int i;
+    for(i = 0; i<60; i++){
+      if(rollno[i] == r){ cout << marks[i] << endl; break;}
+    }
+    if(i >= 60) cout << "Invalid roll number.\n";
+  }
+}

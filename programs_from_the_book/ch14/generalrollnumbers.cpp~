@@ -1,0 +1,30 @@
+#include <simplecpp>
+int main(){
+  int rollno[60];
+  double marks[60];
+  
+  for(int i=0; i<60; i++) cin >> rollno[i] >> marks[i];
+  
+  while(true){
+    int r; cin >> r;  // roll number whose marks are requested
+    if(r == -1) break;
+    for(int i=0; i<60; i++)
+       if(rollno[i] == r) cout << marks[i] << endl;
+  }
+\end{verbatim}
+This idea, scanning an array from the beginning to the end in order to
+determine if a certain element is stored in the array, is sometimes
+called {\em linear search}.
+
+The code above is unsatisfactory in two ways.  First, if the given
+value {\tt r} is not present in the array, it would be polite to print
+a message to that effect.  Second, once we find {\tt r} at some index,
+there is no need to scan the remaining elements.  Both these goals can
+be acheived by replacing the {\tt for} loop above with the following.
+\begin{verbatim}
+    int i;
+    for(i = 0; i<60; i++){
+       if(rollno[i] == r){ cout << marks[i] << endl; break;}
+    }
+    if(i >= 60) cout << "Invalid roll number.\n";
+}
